@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nodes_sample= [
+                { id: 'a', text: '桂枝汤', color:'#17A589', borderColor:'#2B99B' },
+                { id: 'b', text: '《医略六书》卷二十五', color: '#43a2f1', borderColor:'#2E86C1' },
+                { id: 'c', text: '白术三钱（炒）' },
+                { id: 'd', text: '桂枝一钱' },
+                { id: 'd2', text: '白芍一钱半' },
+                { id: 'd3', text: '炙草八分' },
+                { id: 'd4', text: '大枣3枚' },
+                { id: 'd5', text: '生姜3片' },
+                { id: 'e', text: '发热', color: '#FF5733', borderColor:'#FF7153'},
+                { id: 'f', text: '恶寒', color: '#FF5733', borderColor:'#FF7153' },
+                { id: 'g', text: '头痛', color: '#FF5733', borderColor:'#FF7153' },
+                { id: 'h', text: '感冒', color: '#FF5733', borderColor:'#FF7153' },
+                { id: 'i', text: '流感', color: '#FF5733', borderColor:'#FF7153' },    
+                { id: 'fangji', text: '五苓散', color:'#17A589', borderColor:'#2B99B'}, 
+                { id: 'book', text: '《医方类聚》', color: '#43a2f1', borderColor:'#2E86C1' },
+                { id: 'c1', text: '泽泻' },
+                { id: 'c2', text: '滑石' },
+                { id: 'c3', text: '赤茯苓' },
+                { id: 'c4', text: '白术' },
+                { id: 'c5', text: '猪苓' },
+                { id: 'd1', text: '湿邪', color: '#FF5733', borderColor:'#FF7153'},
+                { id: 'd2', text: '口渴', color: '#FF5733', borderColor:'#FF7153'},
+            ]
+            let lines_sample= [
+                { from: 'a', to: 'b', text: '出处', color: '#43a2f1' },
+                { from: 'a', to: 'c', text: '处方' },
+                { from: 'a', to: 'd', text: '处方' },
+                { from: 'a', to: 'd2', text: '处方' },
+                { from: 'a', to: 'd3', text: '处方' },
+                { from: 'a', to: 'd4', text: '处方' },
+                { from: 'a', to: 'd5', text: '处方' },
+                { from: 'a', to: 'e', text: '主治' },
+                { from: 'a', to: 'f', text: '主治' },
+                { from: 'a', to: 'g', text: '主治' },
+                { from: 'h', to: 'e', text: '引起' },
+                { from: 'h', to: 'g', text: '引起' },
+                { from: 'i', to: 'e', text: '引起' },
+                { from: 'i', to: 'g', text: '引起' },
+                { from: 'fangji', to: 'book', text: '出处', color: '#43a2f1' },
+                { from: 'a', to: 'c1', text: '处方' },
+                { from: 'a', to: 'c2', text: '处方' },
+                { from: 'a', to: 'c3', text: '处方' },
+                { from: 'a', to: 'c4', text: '处方' },
+                { from: 'a', to: 'c5', text: '处方' },
+                { from: 'fangji', to: 'e', text: '主治' },
+                { from: 'fangji', to: 'g', text: '主治' },
+                { from: 'fangji', to: 'd2', text: '主治' },
+                { from: 'd1', to: 'e', text: '引起' },
+                { from: 'd1', to: 'g', text: '引起' },
+                { from: 'd2', to: 'g', text: '引起' },
+            ]
+        data = '(方剂)一贯煎-组成成分-(中药材)炒白芍\n(方剂)一贯煎-组成成分-(中药材)当归\n(方剂)一贯煎-组成成分-(中药材)川芎\n(方剂)一贯煎-组成成分-(中药材)熟地黄\n(方剂)一贯煎-组成成分-(中药材)山药\n(方剂)一贯煎-组成成分-(中药材)红枣\n(方剂)一贯煎-治疗病症-(病症)痛经\n(方剂)一贯煎-治疗病症-(病症)月经不调\n(方剂)一贯煎-用药方法-急火煎之\n(方剂)一贯煎-用药方法-慢火煎之\n(方剂)一贯煎-包含功效-(中药材功效)活血化瘀\n(方剂)一贯煎-包含功效-(中药材功效)滋阴补血'
+        data = data.split('\n')
+        data = data.map(item => {
+            item = item.split('-')
+            return {
+                head: item[0],
+                relation: item[1],
+                tail: item[2]
+            }
+        })
+        const nodes = []
+        const nodesName = []
+        data.forEach(element => {
+            if(!nodesName.includes(element.head)){
+                nodesName.push(element.head)
+                nodes.push({
+                    id: element.head,
+                    text: element.head
+                })
+            }
+            if(!nodesName.includes(element.tail)){
+                nodesName.push(element.tail)
+                nodes.push({
+                    id: element.tail,
+                    text: element.tail
+                })
+            }
+        });
+        const relation = []
+        data.forEach(element => {
+            relation.push({
+                from: element.head,
+                to: element.tail,
+                text: element.relation
+            })
+        });
+        console.log(data);
+        console.log(nodes);
+        console.log(relation);
+    </script>
+</body>
+</html>
