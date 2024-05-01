@@ -315,7 +315,7 @@ export default {
         try {
           //this.messages.push({ content: '', isUser: false });
           const response1 = await axios.post(
-              "http://221.238.213.190:9100/kgqa/chat/chat",
+              "https://tcm.subit.org.cn/kgqa/chat/chat",
               {
                 query: this.userMessage,
                 sessionId: "1125"
@@ -339,7 +339,7 @@ export default {
           this.messages.push({ content: answer, isUser: false, docs });
           this.loading1 = false;
           const response2 = await axios.post(
-              "http://221.238.213.190:9100/chatbot/chatbot_ner",
+              "https://tcm.subit.org.cn/chatbot/chatbot_ner",
               { prompt: answer },
           );
           console.log("response2", response2);
